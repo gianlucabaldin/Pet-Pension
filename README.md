@@ -12,4 +12,6 @@ Technologies used:
 
 You're free to download it from my GitHub profile, use it, modify and distribute it, just please give me a credit.
 
+P.s. with standard Chrome setting you'll get CORS JS problem domain, so use Firefox or other browser o if you want to use it within Chrome allow all (https://stackoverflow.com/questions/3102819/disable-same-origin-policy-in-chrome) or run it into a web server
+
 Gianluca Baldin
