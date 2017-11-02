@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title data-i18n="pet_pension">Pet Pension</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+        <!-- Custom styles for this template -->
+        <link href="../css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="../ext_lib/font-awesome-4.7.0/css/font-awesome.min.css">
+
+    </head>
+    <body>
+
+        <!-- nav bar - start -->
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+
+            <!-- collapsed button -->
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Home button on the left -->            
+            <a class="navbar-brand active" href="../home.html">
+                <i class="fa fa-home fa-lg" aria-hidden="true">
+                </i><span class="ml-2" data-i18n="pet_pension">Pet Pension</span> 
+            </a>
+
+            <!-- Nav bar list items -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="nav nav-pills my-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="pet_list.html" data-i18n="pets">Animali</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="owner_list.html" data-i18n="owners">Proprietari</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reservation_list.html" data-i18n="reservations">Prenotazioni</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="planning.html" data-i18n="planning">Planning</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Button export/import Localstorage on the right -->
+            <a class="navbar-brand nav justify-content-end display-3" download="dbCopy.json" href="" id="exportDB">Export DB</a>
+            <label class="navbar-brand nav justify-content-end display-3 btn-deafault btn-file cursor-pointer" id="importDB" for="file">Import DB</label><input type="file" id="file" hidden>
+        </nav>
+        <!-- nav-bar - end -->
+
+        <!-- start Pet form -->
+        <div class="container" id="pet-insert-modify">        
+            <p class="h1 text-center my-4" data-i18n="insert_pet">Inserisci Animale</p> 
+
+            <!-- needed for editing purpouse -->
+            <input type="hidden" id="id">
+
+            <!-- error messages (if present) -->
+            <div class="alert alert-danger display-none" role="alert" id="form-errors"></div>
+            <!-- warning messages (if present) -->
+            <div class="alert alert-warning display-none" role="alert" id="form-warning"></div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2">
+                    <label for="inputEmail3" class="col-form-label justify-content-sm-end" data-i18n="pet_type">Tipo Animale</label>
+                </div>
+                <div class="col-sm-1">
+                    <input class="form-check-input" type="radio" name="pet-type" value="dog" id="pet-type-dog" data-i18n="dog"> Cane
+                </div>
+                <div class="col-sm-1">
+                    <input class="form-check-input" type="radio" name="pet-type" value="cat" id="pet-type-cat" data-i18n="cat"> Gatto
+                </div>
+                <div class="col-sm-3">
+                    <input class="form-check-input" type="radio" name="pet-type" value="other" id="pet-type-other" data-i18n="other_pet"> Altro
+                    <input type="text" class="form-control" id="pet-type-other-value" placeholder="capra, uccellino.." style="width:150px">
+                </div>
+                <div class="col-sm-1">
+                    <label for="inputEmail3" class="col-form-label justify-content-sm-end" data-i18n="name">Nome</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control"  id="name" placeholder="xxx, yyy, zzz">
+                </div>
+            </div>
+
+            <div class="row form-group form-inline ">
+                <div class="col-sm-2">
+                    <label for="inputEmail3" class="col-form-label justify-content-sm-end" data-i18n="sex">Sesso</label>
+                </div>
+                <div class="col-sm-1">
+                    <input class="form-check-input" type="radio" name="sex" value="M" id="sex-m"> M
+                </div>
+                <div class="col-sm-1">
+                    <input class="form-check-input" type="radio" name="sex" value="F" id="sex-f"> F
+                </div>
+                <div class="col-sm-2 offset-sm-2 ">
+                    <label for="inputEmail3" class="col-form-label justify-content-sm-end" data-i18n="sterilized">Sterilizzato</label>
+                </div>
+                <div class="col-sm-1">
+                    <input class="form-check-input" type="radio" name="sterilized" value="Y" id="sterilized-y" data-i18n="yes"> Si
+                </div>
+                <div class="col-sm-1">
+                    <input class="form-check-input" type="radio" name="sterilized" value="N" id="sterilized-n"> No
+                </div>
+                <div class="col-sm-1">
+                    <input class="form-check-input" type="radio" name="sterilized" value="?" id="sterilized-x"> ?
+                </div>
+            </div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2 ">
+                    <label for="race-size" class="col-form-label justify-content-sm-end" data-i18n="race_size">Razza / Taglia</label>
+                </div>                
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="race-size" placeholder="bovaro/grande, ...">
+                </div>
+                <div class="col-sm-2">
+                    <label for="owner" class="col-form-label justify-content-sm-end"data-i18n="owner">Proprietario</label>
+                </div>                
+                <div class="col-sm-4">
+                    <select class="custom-select" id="owner-list">
+                    </select>
+                </div>
+            </div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2 ">
+                    <label for="vaccines" class="col-form-label justify-content-sm-end" data-i18n="vaccines">Vaccini</label>
+                </div>                
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="vaccines" placeholder="xxx, yyy, zzz">
+                </div>
+                <div class="col-sm-2">
+                    <label for="pesticides" class="col-form-label justify-content-sm-end" data-i18n="pesticides">Antiparassitari</label>
+                </div>                
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="pesticides" placeholder="crocchette..">
+                </div>
+            </div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2 ">
+                    <label for="feeding" class="col-form-label justify-content-sm-end" data-i18n="feedings">Alimentazione</label>
+                </div>                
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="feeding" placeholder="crocchette..">
+                </div>
+            </div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2 ">
+                    <label for="health" class="col-form-label justify-content-sm-end" data-i18n="health">Salute</label>
+                </div>                
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="health" placeholder="note varie sulla salute..">
+                </div>
+            </div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2 ">
+                    <label for="behavior" class="col-form-label justify-content-sm-end" data-i18n="behaviour">Comportamento</label>
+                </div>                
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="behavior" rows="2"
+                              placeholder="è la mia ombra, ubbidientissima, dorme sul tappeto in camera in giardino abbaia un pochino se mi vede"></textarea>
+                </div>
+            </div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2 ">
+                    <label for="health" class="col-form-label justify-content-sm-end">Taxi</label>
+                </div>                
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="taxi" placeholder="si / no, accordi vari ecc..">
+                </div>
+            </div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2 ">
+                    <label for="agreements" class="col-form-label justify-content-sm-end" data-i18n="agreements">Accordi</label>
+                </div>                
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="agreements" placeholder="autorizzata a portarla con noi in auto ecc..">
+                </div>
+            </div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2 ">
+                    <label for="extra" class="col-form-label justify-content-sm-end" data-i18n="extra_services" data-i18n="extra_services" >Servizi Extra</label>
+                </div>                
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="extra" placeholder="ecc..">
+                </div>
+            </div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2 ">
+                    <label for="can-share-with" class="col-form-label justify-content-sm-end" data-i18n="may_share_with">Può condividere con</label>
+                </div>                
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="can-share-with" placeholder="cane1, cane2, gatto1 ecc..">
+                </div>
+            </div>
+            <!-- end Pet form -->
+
+            <!-- start buttons - insert / modify / save and clone / delete -->
+            <div class="container my-5" id="reservation-list" id="pet-form">
+                <div class="d-flex justify-content-around">
+                    <button type="submit" class="btn btn-primary col-sm-2 " id="pet-insert" data-i18n="insert">Inserisci</button>
+                    <button type="submit" class="btn btn-primary col-sm-2 display-none" id="pet-save" data-i18n="save_modifies">Salva modifiche</button>
+                    <button type="submit" class="btn btn-primary col-sm-2  display-none" id="pet-save-clone" data-i18n="save_clone">(Salva e) duplica</button>
+                    <!--                <button type="submit" class="btn btn-primary col-sm-2 text-justify-center display-none" id="pet-delete">Elimina</button>-->
+                    <button type="submit" class="btn btn-primary col-sm-2 text-justify-center display-none" id="pet-delete" data-toggle="modal" data-target="#deleteModalPopup" data-i18n="delete_item">Elimina</button>
+                </div>
+            </div>
+            <!-- end buttons - insert / modify / save and clone / delete -->
+
+            <!-- Modal Delete-->
+            <div class="modal fade in" id="deleteModalPopup">
+                <div class="modal-dialog" role="dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" data-i18n="confirm" >Conferma</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p data-i18n="confirm_delete">Sei sicuro di voler procedere con l'eliminazione ?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="pet-delete-modal" data-i18n="delete">Elimina</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="pet-delete-canceling" data-i18n="cancel">Annulla</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal item clone confirm -->
+            <div class="modal fade" id="clone-confermed">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" data-i18n="confirm">Conferma</h5> 
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="clone-confermed-text">
+                            <p data-i18n="importDB">La tua copia locale del Database è stata inserita correttamente</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="close-modal" data-i18n="welcome">Ok, grazie!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- jQuery  -->
+        <script  src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <!-- Bootstrap -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+        <!-- page's JS -->
+        <script type="text/javascript" src="../js/pet.js"></script>
+        <script type="text/javascript" src="../ext_lib/jquery.i18n.properties-1.0.9.js"></script>
+        <script type="text/javascript" src="../js/main.js"></script>
+        <script type="text/javascript" src="../js/import_export_LS.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,183 @@
+/* make table rows compact */
+.table td, .table th {
+    text-align: center !important;
+    padding: .25rem !important; /* overrides the jquery.dataTables.min.css */
+    vertical-align: middle !important; /* to align vertically the Planning table's cells since they could have 2 names per items */
+    font-weight: normal !important;    /* default is bold */
+}
+
+/*  insert a 2px space between two filled cells displayed vertically inside a single table's cell
+Since in the Planning table every item displayed (<a>) is followed by an input (hidden), in case of two item in the same cell the order will be <a><input..><a><input..>, so if selected all the <a> preceded by an <input>, just the second ones will be selected */
+input[type="hidden"] + a  {
+    margin-top: 2px;
+}
+
+/* link to the grey color*/
+.nav a {
+    color: #292b2c;
+    font-size: 1.25rem;
+}
+
+/* bold to the Home button in nav bar */
+#home-nav {
+    font-weight: bold;
+}
+
+/* planning slots */
+.slot-busy {
+    background-color: #0275d8;
+    color: #FFFFFF;
+}
+
+/* necessary override to fit the parent col-sm-xx container, otherwise it could be less and seems no to follow the boostrap grid set - example "Name" input field in pet.html */
+.form-inline .form-control {
+    width: 100%;
+}
+
+/* "Detail" button */
+.btn-detail {
+    height: 15px;
+    width: 15px;
+}
+
+/* if combobox is inside a div with "col-4" class but its items are slimmer, the width of the select as standard doesn't fit all the width available, ruing the 2-columns form alignment */
+select {
+    width: 100%;
+}
+
+/* remove bootstrap's "form-group" class margin (bootstrap's default is 1rem) */
+.form-group {
+    margin-bottom: 0.5rem;
+}
+
+/* links inside the cells */
+td a {
+    color: inherit; /* prevent anchors standard blu color but inherits from parent */
+    display: block; /* since the planning page has an anchor inside all items, the anchor fills the text so -if minor than its container, the td- it would create a (withe) space between the anchor and the border's td element --> with the block value  the anchor background - set throught slot-free and slot-busy css classes - fills all the available space (the td) */
+}
+
+/* override Datatable last row hides the ending line between the table and its footer (where's hte pagination) */
+table {
+    border-collapse: collapse !important;
+}
+
+/* back and forward arrows in planning */
+.planning-arrows {
+    position: relative;
+    top: 50px;
+}
+/* override Select2's css width in Reservation because it overflows BS "col-xs-4" container */
+.select2-container {
+    width: 100% !important;
+}
+
+/* footer link items - Author Info and Project Info*/
+ .footer-link, .footer-link:hover, .footer-link:focus {
+    color: rgba(0,0,0,.9);
+    font-size: 1.25rem;
+    text-decoration: none;  /* removes default underlin of <a> tags */
+}
+
+/* flags ita and eng */
+.flag {
+    background: inherit;
+}
+.flag img {
+    height: 25px;
+    width: 25px;
+    padding: 0;
+}
+
+/* color "Export" button */
+#export_anchor{
+    color: rgba(0,0,0,.9);
+}
+
+/* Sticky footer styles - start */
+/* keeps the page relative maintaining the footer sticky, so scrolling down the page it would be always at the bottom no matter the page's content height  */
+html {
+    position: relative;
+    min-height: 100%;
+}
+/* positioned with 0 pixel from the bottom --> sticky to the end of the page */ 
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    /*  height: 60px;*/
+    /*  line-height: 60px;  Vertically center the text there */
+    /*  background-color: #f7f7f7;;*/
+}
+/* Sticky footer styles - end */
+
+/******************/
+/* helper classes */
+/******************/
+.margin-top-25em {
+    margin-top: .25em;
+}
+/* use on "importDB" button - used a <label> to wrap the <input type="file"> because the <a> has problems in some browsers so the cursor has been overriden to look it like an anchor */
+.cursor-pointer {
+    cursor: pointer;    
+}
+/* to hide elements I'd use native BS4's "d-none" native class, but then the jQuery.show() wouldn't work on those elements --> see http://api.jquery.com/show/ at the Notes "If using !important in your styles, such as display: none !important, .show() will not override !important" --> that's exactly what BS's "d-none" class is about */
+.display-none {
+    display: none;
+}
+
+.border-none {
+    border: none
+}
+.jumbotron {
+    background-color: #FFFFFF;
+    padding: 4rem 2rem 0 2rem;
+}
+
+/* TOOLTIP */
+.tooltip > .tooltip-inner {
+    background-color: #FFFFFF; 
+    color: #000000; 
+    border: 1px solid #000000;
+    padding: 15px;
+    font-size: 16px;
+}
+.tooltip > .tooltip-inner table tbody tr th, .tooltip > .tooltip-inner table tbody tr td {
+    opacity: 1;
+    padding: 0 20px;
+    vertical-align: middle;
+    overflow: hidden;
+}
+.tooltip > .tooltip-inner table tbody tr th {
+    text-align: right;
+}
+.tooltip > .tooltip-inner table tbody tr td {
+    text-align: left;
+}
+.tooltip {
+    max-width: 100% !important;
+    width: 300px;
+}
+.tooltip-inner {
+    min-width: 100%;
+}
+
+
+
+/* select2'library overrides - start */
+/* the with was fixed in 391.979 pixel */
+
+/* border ad default BS input fields */
+.select2-selection.select2-selection--single {
+    border: 1px solid rgba(0,0,0,.15) !important;
+}
+/* override selected item's height container (library's 28px) */
+.select2-container--default .select2-selection--single {
+    height: 40px !important;
+}
+/* override selected item's css positioning the selected inside its container */
+.select2-selection__rendered {
+    position: relative;
+    top: 5px;
+    left: 2px;
+}

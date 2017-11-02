@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!--    <link rel="icon" href="../../favicon.ico">-->
+
+        <title data-i18n="pet_pension">Pet Pension</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+        <!-- Custom styles for this template -->
+        <link href="../css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="../ext_lib/font-awesome-4.7.0/css/font-awesome.min.css">
+
+    </head>
+    <body>
+
+        <!-- nav bar - start -->
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+
+            <!-- collapsed button -->
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Home button on the left -->            
+            <a class="navbar-brand active" href="../home.html">
+                <i class="fa fa-home fa-lg" aria-hidden="true">
+                </i><span class="ml-2" data-i18n="pet_pension">Pet Pension</span> 
+            </a>
+
+            <!-- Nav bar list items -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="nav nav-pills my-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="pet_list.html" data-i18n="pets">Animali</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="owner_list.html" data-i18n="owners">Proprietari</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reservation_list.html" data-i18n="reservations">Prenotazioni</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="planning.html" data-i18n="planning">Planning</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Button export/import Localstorage on the right -->
+            <a class="navbar-brand nav justify-content-end display-3" download="dbCopy.json" href="" id="exportDB">Export DB</a>
+            <label class="navbar-brand nav justify-content-end display-3 btn-deafault btn-file cursor-pointer" id="importDB" for="file">Import DB</label><input type="file" id="file" hidden>
+        </nav>
+        <!-- nav-bar - end -->
+
+        <!-- start owner insert / modify / save and clone / delete -->        
+        <div class="container" id="owner-insert-modify">
+
+            <!-- needed for editing purpouse -->
+            <input type="hidden" id="id">
+
+            <p class="h1 text-center my-4" data-i18n="owner">Proprietario</p> 
+
+            <!-- error messages (if present) -->
+            <div class="alert alert-danger display-none" role="alert" id="form-errors"></div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2 ">
+                    <label for="name" class="col-form-label justify-content-sm-end"  data-i18n="name_surname">Nome / Cognome</label>
+                </div>                
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" placeholder="Giovanna di Gianni..">
+                </div>
+
+            </div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2 ">
+                    <label for="address" class="col-form-label justify-content-sm-end" data-i18n="address">Indirizzo</label>
+                </div>                
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="address" placeholder="Via Stradella Lobbia 14 37135 VR..">
+                </div>
+            </div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2 ">
+                    <label for="phone1" class="col-form-label justify-content-sm-end"  data-i18n="contact1">Recapito 1</label>
+                </div>                
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="phone1" placeholder="Pippo 347/9999999">
+                </div>
+                <div class="col-sm-2">
+                    <label for="phone2" class="col-form-label justify-content-sm-end" data-i18n="contact2">Recapito 2</label>
+                </div>                
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="phone2" placeholder="Pluto 347/6666666">
+                </div>
+            </div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2 ">
+                    <label for="whereCalls" class="col-form-label justify-content-sm-end"  data-i18n="calls_on">Chiama su cell</label>
+                </div>                
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="where-calls" placeholder="cani / personale..">
+                </div>
+                <div class="col-sm-2">
+                    <label for="reference" class="col-form-label justify-content-sm-end"  data-i18n="reference">Amico di</label>
+                </div>                
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="reference" placeholder="Caio da Abano Termo">
+                </div>
+            </div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2 ">
+                    <label for="notes" class="col-form-label justify-content-sm-end" data-i18n="owner_notes">Note Padrone</label>
+                </div>                
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="notes" rows="2"
+                              placeholder= "è la mia ombra, ubbidientissima, dorme sul tappeto in camera in giardino abbaia un pochino se mi vede"></textarea>
+                </div>
+            </div>
+            <!-- end owner insert / modify / save and clone / delete -->
+
+            <!-- start buttons - insert / modify / save and clone / delete -->
+            <div class="my-5" id="reservation-list" id="reservation-form">
+                <div class="row d-flex justify-content-around">
+                    <button type="submit" class="btn btn-primary col-sm-2 text-justify-center" id="owner-insert" data-i18n="insert">Inserisci </button>
+                    <button type="submit" class="btn btn-primary col-sm-2 text-justify-center display-none" id="owner-save" data-i18n="save_modifies">Salva modifiche</button>
+                    <button type="submit" class="btn btn-primary col-sm-2 text-justify-center display-none" id="owner-save-clone" data-i18n="save_clone">(Salva e) duplica</button>
+                    <button type="submit" class="btn btn-primary col-sm-2 text-justify-center display-none" id="owner-delete" data-toggle="modal" data-target="#deleteModalPopup" data-i18n="delete_item">Elimina</button>
+                </div>
+            </div>
+            <!-- end buttons - insert / modify / save and clone / delete -->    
+
+            <!-- Modal Delete-->
+            <div class="modal fade in" id="deleteModalPopup">
+                <div class="modal-dialog" role="dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" data-i18n="confirm">Conferma</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" data-i18n="confirm_delete">
+                            <p>Sei sicuro di voler procedere con l'eliminazione ?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="owner-delete-modal" data-i18n="delete_item">Elimina</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="owner-delete-canceling" data-i18n="cancel">Annulla</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal item clone confirm -->
+            <div class="modal fade" id="clone-confermed">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" data-i18n="confirm">Conferma</h5> 
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="clone-confermed-text">
+                            <p data-i18n="importDB">La tua copia locale del Database è stata inserita correttamente</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="close-modal">Ok, grazie!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- jQuery  -->
+        <script  src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <!-- Bootstrap -->
+        <!--        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<!--        <script src="/ext_lib/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>-->
+
+        <!-- page's JS -->
+        <script type="text/javascript" src="../js/owner.js"></script>
+        <script type="text/javascript" src="../js/import_export_LS.js"></script>
+        <script type="text/javascript" src="../ext_lib/jquery.i18n.properties-1.0.9.js"></script>
+        <script type="text/javascript" src="../js/main.js"></script>
+        
+    </body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!--    <link rel="icon" href="../../favicon.ico">-->
+
+        <title data-i18n="pet_pension">Pet Pension</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+        <!-- jQuery DataTable third-party plugin's JS  - core / Print / Exel export / PDF export -->
+        <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="../css/buttons.dataTables.min.css">
+
+        <!-- Custom styles for this template -->
+        <link href="../css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="../ext_lib/font-awesome-4.7.0/css/font-awesome.min.css">
+
+    </head>
+    <body>
+
+        <!-- nav bar - start -->
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+
+            <!-- collapsed button -->
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Home button on the left -->            
+            <a class="navbar-brand active" href="../home.html">
+                <i class="fa fa-home fa-lg" aria-hidden="true">
+                </i><span class="ml-2" data-i18n="pet_pension">Pet Pension</span> 
+            </a>
+
+            <!-- Nav bar list items -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="nav nav-pills my-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="pet_list.html" data-i18n="pets">Animali</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="owner_list.html" data-i18n="owners">Proprietari</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reservation_list.html" data-i18n="reservations">Prenotazioni</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="planning.html" data-i18n="planning">Planning</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Button export/import Localstorage on the right -->
+            <a class="navbar-brand nav justify-content-end display-3" download="dbCopy.json" href="" id="exportDB">Export DB</a>
+            <label class="navbar-brand nav justify-content-end display-3 btn-deafault btn-file cursor-pointer" id="importDB" for="file">Import DB</label><input type="file" id="file" hidden>
+        </nav>
+        <!-- nav-bar - end -->
+
+        <!-- start owner list -->        
+        <div class="container" id="owner-list">
+            <p class="h1 text-center my-2">Proprietari</p> 
+            <table class="table" id="owner-list-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th data-i18n="nominative">Nominativo</th>
+                        <th data-i18n="address">Indirizzo</th>
+                        <th data-i18n="contact1">Recapito 1</th>
+                        <th data-i18n="contact2">Recapito 2</th>
+                        <th data-i18n="notes">Note</th>
+                        <th data-i18n="detail">Dettaglio</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <!-- end owner list -->
+
+        <!-- start buttons - insert / modify / save and clone / delete -->
+        <div class="container my-4" id="reservation-list" id="reservation-form">
+            <div class="row d-flex justify-content-around">
+                <button type="submit" class="btn btn-primary col-sm-2 text-justify-center" id="owner-insert" data-i18n="insert_new">Inserisci
+                </button>
+            </div>
+        </div>
+        <!-- end buttons - insert / modify / save and clone / delete -->      
+
+        <!-- jQuery  -->
+        <script  src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <!-- Bootstrap -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+        <!-- jQuery DataTable third-party plugin's JS  - core / Print / Exel export / PDF export -->
+        <script type="text/javascript" src="../ext_lib/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="../ext_lib/buttons.print.min.js"></script>
+        <script type="text/javascript" src="../ext_lib/buttons.html5.min.js"></script>
+        <script type="text/javascript" src="../ext_lib/dataTables.buttons.min.js"></script>
+        <script type="text/javascript" src="../ext_lib/jszip.min.js"></script>
+        <script type="text/javascript" src="../ext_lib/pdfmake.min.js"></script>
+        <script type="text/javascript" src="../ext_lib/vfs_fonts.js"></script>
+
+        <!-- page's JS -->
+        <script type="text/javascript" src="../js/owner_list.js"></script>
+        <script type="text/javascript" src="../ext_lib/jquery.i18n.properties-1.0.9.js"></script>
+        <script type="text/javascript" src="../js/main.js"></script>
+        <script type="text/javascript" src="../js/import_export_LS.js"></script>
+
+    </body>
+</html>

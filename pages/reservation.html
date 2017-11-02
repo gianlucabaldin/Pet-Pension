@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!--    <link rel="icon" href="../../favicon.ico">-->
+
+        <title data-i18n="pet_pension">Pet Pension</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+        <!-- Custom styles for this template -->
+        <link href="../css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="../ext_lib/font-awesome-4.7.0/css/font-awesome.min.css">
+        <!-- Select2 CSS lybrary for table list management -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+
+    </head>
+    <body>
+
+        <!-- nav bar - start -->
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+
+            <!-- collapsed button -->
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Home button on the left -->            
+            <a class="navbar-brand active" href="../home.html">
+                <i class="fa fa-home fa-lg" aria-hidden="true">
+                </i><span class="ml-2" data-i18n="pet_pension">Pet Pension</span> 
+            </a>
+
+            <!-- Nav bar list items -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="nav nav-pills my-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="pet_list.html" data-i18n="pets">Animali</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="owner_list.html" data-i18n="owners">Proprietari</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reservation_list.html" data-i18n="reservations">Prenotazioni</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="planning.html" data-i18n="planning">Planning</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Button export/import Localstorage on the right -->
+            <a class="navbar-brand nav justify-content-end display-3" download="dbCopy.json" href="" id="exportDB">Export DB</a>
+            <label class="navbar-brand nav justify-content-end display-3 btn-deafault btn-file cursor-pointer" id="importDB" for="file">Import DB</label><input type="file" id="file" hidden>
+        </nav>
+        <!-- nav-bar - end -->
+
+        <!-- start owner insert - modify -->        
+        <div class="container" id="reservation-insert-modify">
+            <p class="h1 text-center my-4" data-i18n="reservations">Prenotazioni</p> 
+
+            <!-- needed for editing purpouse -->
+            <input type="hidden" id="id">
+
+            <!-- error messages (if present) -->
+            <div class="alert alert-danger display-none" role="alert" id="form-errors"></div>
+            <!-- warning messages (if present) -->
+            <div class="alert alert-warning display-none" role="alert" id="form-warning1"></div>
+            <div class="alert alert-warning display-none" role="alert" id="form-warning2"></div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2">
+                    <label for="owner" class="col-form-label justify-content-sm-end" data-i18n="owner_name">Nome Padrone</label>
+                </div>                
+                <div class="col-sm-4">
+                    <select class="custom-select" id="owner-list"></select>
+                </div>
+
+                <div class="col-sm-1">
+                    <i class="fa fa-refresh" aria-hidden="true" id="lists-refresh"></i>
+                </div>
+                <div class="col-sm-1">
+                    <label for="name" class="col-form-label justify-content-sm-end" data-i18n="pet_name">Nome Animale</label>
+                </div>                
+                <div class="col-sm-4">
+                    <select class="custom-select" id="pet-list"></select>
+                </div>
+            </div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2 ">
+                    <label for="from" class="col-form-label justify-content-sm-end" data-i18n="from">Da</label>
+                </div>                
+                <div class="col-sm-4">
+                    <input type="date" class="form-control" id="from">
+                </div>
+                <div class="col-sm-2">
+                    <label for="to" class="col-form-label justify-content-sm-end" data-i18n="to">A</label>
+                </div>                
+                <div class="col-sm-4">
+                    <input type="date" class="form-control" id="to">
+                </div>
+            </div>
+
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2">
+                    <label for="cost-per-night" class="col-form-label justify-content-sm-end" data-i18n="night_rate">Costo / Notte</label>
+                </div>                
+                <div class="col-sm-1">
+                    <input type="number" class="form-control" id="cost-per-night" value="15">
+                </div>
+                <div class="col-sm-2">
+                    <label for="cost-per-day" class="col-form-label justify-content-sm-end" data-i18n="day_rate">Costo / Giorno</label>
+                </div>                
+                <div class="col-sm-1">
+                    <input type="number" class="form-control" id="cost-per-day" value="20">
+                </div>
+                <div class="col-sm-2">
+                    <label for="nights" class="col-form-label justify-content-sm-end" data-i18n="nights">Notti</label>
+                </div>                
+                <div class="col-sm-1">
+                    <input type="number" class="form-control" id="nights" disabled>
+                </div>
+                <div class="col-sm-2">
+                    <label for="days" class="col-form-label justify-content-sm-end disabled" data-i18n="days">Giorni</label>
+                </div>                
+                <div class="col-sm-1">
+                    <input type="number" class="form-control disabled" id="days" disabled>
+                </div>
+            </div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2">
+                    <label for="notes" class="col-form-label justify-content-sm-end" data-i18n="reservation_notes">Note Prenotazione</label>
+                </div>                
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="notes" rows="2"
+                              placeholder= "porta animale alle 11, chiamerà per sapere come stà la sera"></textarea>
+                </div>
+            </div>
+
+            <div class="row form-group form-inline">
+                <div class="col-sm-2 ">
+                    <label for="payment-notes" class="col-form-label justify-content-sm-end" data-i18n="payments_notes">Note Pagamento</label>
+                </div>                
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="payment-notes" placeholder="paga metà alla consegna, metà al ritiro dell'animale">
+                </div>
+            </div>
+            <div class="row form-group form-inline">
+                <div class="col-sm-2">
+                    <label for="sale" class="col-form-label justify-content-sm-end" data-i18n="discount">Sconto / Surplus</label>
+                </div>                
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="sale" value="+0">
+                </div>
+                <div class="col-sm-1">
+                    <label for="payed" class="col-form-label justify-content-sm-end" data-i18n="payed">Saldato</label>
+                </div>                
+                <div class="col-sm-1">
+                    <input class="form-check-input margin-top-25em" type="checkbox" id="payed" value="option1" aria-label="...">
+                </div>
+                <div class="col-sm-1">
+                    <label for="tot" class="col-form-label justify-content-sm-end" data-i18n="tot">Totale</label>
+                </div>                
+                <div class="col-sm-2">
+                    <input type="number" class="form-control" id="tot" value="+50">
+                </div>
+                <div class="col-sm-1">
+                    <label for="box" class="col-form-label justify-content-sm-end">Box</label>
+                </div>                
+                <div class="col-sm-2">
+                    <select class="custom-select" id="box">
+                        <option selected></option>
+                        <option value="box1">Box 1</option>
+                        <option value="box2">Box 2</option>
+                        <option value="box3">Box 3</option>
+                        <option value="box4">Box 4</option>
+                        <option value="box5">Box 5</option>
+                        <option value="box6">Box 6</option>
+                        <option value="box7">3x3</option>
+                        <option value="box8">DogHouse</option>
+                        <option value="box9">Casa 1</option>
+                        <option value="box10">Casa 2</option>
+                    </select>
+                </div>
+            </div>
+            <!-- end owner insert - modify -->
+
+            <!-- start buttons - insert / modify / save and clone / delete -->
+            <div class="my-5" id="reservation-list" id="reservation-form">
+                <div class="row d-flex justify-content-around">
+                    <button type="submit" class="btn btn-primary col-sm-2 text-justify-center" id="reservation-insert" data-i18n="insert">Inserisci </button>
+                    <button type="submit" class="btn btn-primary col-sm-2 text-justify-center display-none" id="reservation-save" data-i18n="save_modifies">Salva modifiche</button>
+                    <button type="submit" class="btn btn-primary col-sm-2 text-justify-center display-none" id="reservation-save-clone" data-i18n="save_clone">(Salva e) duplica</button>
+                    <button type="submit" class="btn btn-primary col-sm-2 text-justify-center display-none" id="reservation-delete" data-toggle="modal" data-target="#deleteModalPopup" data-i18n="delete_item">Elimina</button>
+                </div>
+            </div>
+            <!-- end buttons - insert / modify / save and clone / delete -->
+
+            <!-- Modal Delete-->
+            <div class="modal fade in" id="deleteModalPopup">
+                <div class="modal-dialog" role="dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" >Conferma</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Sei sicuro di voler procedere con l'eliminazione ?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="reservation-delete-modal">Elimina</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="reservation-delete-canceling">Annulla</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal insert a reservtion overlaps other ones already stored -->
+            <div class="modal fade" id="overlapping-reservation">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Attenzione</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="overlapping-reservation-text">
+                            <!--                        <p>Modal body text goes here.</p>-->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="confirm-overlapping-reservation">Confermo</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal item clone confirm -->
+            <div class="modal fade" id="clone-confermed">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Conferma</h5> 
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="clone-confermed-text">
+                            <p>La tua copia locale del Database è stata inserita correttamente</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="close-modal">Ok, grazie!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- jQuery  -->
+        <script  src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <!-- Bootstrap -->
+        <script src="../ext_lib/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <!-- page's JS -->
+        <script type="text/javascript" src="../js/reservation.js"></script>
+        <script type="text/javascript" src="../ext_lib/jquery.i18n.properties-1.0.9.js"></script>
+        <script type="text/javascript" src="../js/main.js"></script>
+        <script type="text/javascript" src="../js/import_export_LS.js"></script>
+        <!-- Select2 JS lybrary for table list management -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+
+
+    </body>
+</html>

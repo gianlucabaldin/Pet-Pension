@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title data-i18n="pet_pension">Pet Pension</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+        <!-- Custom styles for this template -->
+        <link href="css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="ext_lib/font-awesome-4.7.0/css/font-awesome.min.css">
+
+    </head>
+    <body>
+
+        <!-- nav bar - start -->
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+
+            <!-- collapsed button -->
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Home button on the left -->            
+            <a class="navbar-brand active" href="../home.html">
+                <i class="fa fa-home fa-lg" aria-hidden="true">
+                </i><span class="ml-2" data-i18n="pet_pension">Pet Pension</span> 
+            </a>
+
+            <!-- Nav bar list items -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="nav nav-pills my-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/pet_list.html" data-i18n="pets">Animali</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/owner_list.html" data-i18n="owners">Proprietari</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/reservation_list.html" data-i18n="reservations">Prenotazioni</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/planning.html" data-i18n="planning">Planning</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Button export/import Localstorage on the right -->
+            <a class="navbar-brand nav justify-content-end display-3" download="dbCopy.json" href="" id="exportDB" data-i18n="export_db">Export DB</a>
+            <label class="navbar-brand nav justify-content-end display-3 btn-deafault btn-file cursor-pointer" id="importDB" for="file" data-i18n="import_db">Import DB</label><input type="file" id="file" hidden>
+        </nav>
+        <!-- nav-bar - end -->
+
+        <!-- main home description -->
+        <div class="jumbotron text-center">
+            <h1 class="display-3"  data-i18n="pet_pension">Pensione animali</h1>
+            <p class="lead" data-i18n="welcome">Benvenuto nell'applicazione di gestione di una Pension Animali. Naviga nel menù in alto per per andare nelle rispettive pagine delle entità del sito. </p>
+            <p class="lead" data-i18n="welcome1">Ricorda che il sito si basa sul LocalStorage di HTML5, un semplice spazio di salvataggio dati che salva alcuni dati all'interno del browser stesso, pertanto se cambi browser all'interno dell'applicativo non troverai nulla di ciò che hai inserito !! Se rimani nello stesso browser invece, alla sua chiusura i dati non saranno eliminati ma saranno disponibili anche la volta successiva, anche se cancelli i dati di navigazion, cookie ecc..
+            </p>
+            <p class="lead" data-i18n="welcome2">
+                Ricorda che puoi importare/esportare il tuo database (LocalStorage) tramite gli appositi tasti in alto a destra.
+            </p>
+        </div>
+
+        <!-- footer - start -->
+        <footer class="bg-faded">
+            <!-- BS flex justify-element-around => display 3 elements with equal margin -->
+            <div class="d-flex justify-content-around">
+                <a href="#" class="m-4 footer-link" data-toggle="modal" data-target="#authorInfo" data-i18n="author_info">Author Info</a>
+                <a href="#" class="m-4 footer-link" data-toggle="modal" data-target="#projectInfo" data-i18n="project_info">Project Info</a>
+                <div class="m-4">
+                    <button type="button" class="btn btn-secondary border-none border-none flag" value="IT" id="lang_it">
+                        <img src="images/flag_italy.svg">
+                    </button>
+                    <button type="button" class="btn btn-secondary border-none border-none flag" value="EN" id="lang_en">
+                        <img src="images/flag_uk.svg">
+                    </button>
+                </div>
+            </div>
+        </footer>
+        <!-- footer - end -->
+
+        <!-- Modal Author-->
+        <div class="modal fade in" id="authorInfo">
+            <div class="modal-dialog" role="dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" data-i18n="author">Gianluca Baldin</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p data-i18n="author_info_descr">Ciao! Mi chiamo Gianluca Baldin, sono sviluppatore software da ormai 10 anni ed ultimamente ho scoperto la programmazione web, di cui me ne sono innamorato.<br/>Dopo qualche progetto minore per lo più per gioco, un amico mi ha chiesto di creargli un gestionale ad hoc customizzato per la pensione animali che possiede a casa, e così ho messo preso l'occasione per mettere assieme varie tecnlogie e tecniche nel creargli questo sito :)<br/>
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="owner-delete-canceling" data-i18n="close">Chiudi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Info-->
+        <div class="modal fade in" id="projectInfo">
+            <div class="modal-dialog" role="dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" >Project Info</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p data-i18n="project_info_descr">Questo sito utilizza le seguenti tecnologie:</p>
+                        <ul>
+                            <li>HTML5 / LocalStorage</li>
+                            <li>Bootstrap v4.0.0 alpha6</li>
+                            <li>jQuery 3.1.1</li>
+                            <li>Javascript</li>
+                            <li>dataTables's jQuery library</li>
+                            <li data-i18n="project_info_descr1">jQuery i18n per l'internazionalizzazione</li>
+                        </ul>
+                        <p data-i18n="project_info_descr2">Questo sito è un prodotto custom svilupapto su specifiche esigenze chieste dalla persona che me lo ha richiesto, NON ha ASSOLUTAMENTE la pretesa di essere il miglior gestionale del settore (io stesso avrei sbiluppato alcune parti in maniera diversa)</p>
+                        <p data-i18n="project_info_descr3">Sei libero di scaricarlo dal mio profilo GitHub, usarlo, modificarlo e distribuirlo, ti chiedo solo in caso di citarmi e darmene credito.</p>
+                        <a href="https://github.com/gianlucabaldin/">My GitHub profile: https://github.com/gianlucabaldin/</a><br/><br/>
+                        <span data-i18n="thanks">Grazie<br/>Gianluca Baldin</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="owner-delete-canceling"  data-i18n="close">Chiudi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <!-- Bootstrap -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <!-- JS to import/export database as json object -->
+        <script type="text/javascript" src="js/import_export_LS.js"></script>
+        <!-- JS i18n for the internalization -->
+        <script type="text/javascript" src="ext_lib/jquery.i18n.properties-1.0.9.js"></script>
+        <!-- JS app core -->
+        <script type="text/javascript" src="js/main.js"></script>
+        
+    </body>
+</html>
